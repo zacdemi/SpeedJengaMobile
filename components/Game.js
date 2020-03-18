@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
 import {Text, View, TouchableHighlight} from 'react-native';
+import Player from './Player';
 
 const Game = ({route, navigation}) => {
-  const {playerCount} = route.params;
-  return <Text>Let's play with {playerCount} players!</Text>;
+  return (
+    <View>
+      <Player totalDuration={90000} />
+    </View>
+  );
 };
 
 export default Game;

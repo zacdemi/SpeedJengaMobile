@@ -44,7 +44,7 @@ class Player extends Component {
         />
         <TouchableHighlight onPress={this.toggleTimer}>
           <Text style={{fontSize: 30}}>
-            {!this.state.timerStart ? 'Start' : 'Stop'}
+            {!this.state.timerStart ? 'Block On' : 'Block Off'}
           </Text>
         </TouchableHighlight>
         <TouchableHighlight onPress={this.resetTimer}>
