@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Text,View, TouchableHighlight } from 'react-native';
-import { Timer } from 'react-native-stopwatch-timer';
+import React, {Component} from 'react';
+import {Text, View, TouchableHighlight} from 'react-native';
+import {Timer} from 'react-native-stopwatch-timer';
 
 class Player extends Component {
   constructor(props) {
@@ -9,6 +9,9 @@ class Player extends Component {
       timerStart: false,
       totalDuration: props.totalDuration,
       timerReset: false,
+      name: '',
+      pauseBlocks: 1,
+      outOfGame: false,
     };
     this.toggleTimer = this.toggleTimer.bind(this);
     this.resetTimer = this.resetTimer.bind(this);
@@ -22,21 +25,27 @@ class Player extends Component {
   resetTimer() {
     this.setState({timerStart: false, timerReset: true});
   }
-  
+
   getFormattedTime(time) {
-      this.currentTime = time;
-  };
+    this.currentTime = time;
+  }
 
   render() {
     return (
       <View>
-        <Timer totalDuration={this.state.totalDuration} msecs start={this.state.timerStart}
+        <Timer
+          totalDuration={this.state.totalDuration}
+          msecs
+          start={this.state.timerStart}
           reset={this.state.timerReset}
           options={options}
           handleFinish={handleTimerComplete}
-          getTime={this.getFormattedTime} />
+          getTime={this.getFormattedTime}
+        />
         <TouchableHighlight onPress={this.toggleTimer}>
-          <Text style={{fontSize: 30}}>{!this.state.timerStart ? "Start" : "Stop"}</Text>
+          <Text style={{fontSize: 30}}>
+            {!this.state.timerStart ? 'Start' : 'Stop'}
+          </Text>
         </TouchableHighlight>
         <TouchableHighlight onPress={this.resetTimer}>
           <Text style={{fontSize: 30}}>Reset</Text>
@@ -47,7 +56,7 @@ class Player extends Component {
   }
 }
 
-const handleTimerComplete = () => alert("custom completion function");
+const handleTimerComplete = () => alert('custom completion function');
 
 const options = {
   container: {
@@ -60,7 +69,7 @@ const options = {
     fontSize: 30,
     color: '#FFF',
     marginLeft: 7,
-  }
+  },
 };
 
-export default Player
+export default Player;

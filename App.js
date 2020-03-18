@@ -1,18 +1,29 @@
+import 'react-native-gesture-handler';
 import React from 'react';
-import Player from './components/Player';
+import Welcome from './components/Welcome';
+import Setup from './components/Setup';
+import Game from './components/Game';
 
-import {
-  StyleSheet,
-  View,
-  Text,
-} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+
+import {StyleSheet, Button, View, Text, TextInput} from 'react-native';
+
+const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <View style={styles.container}>
-       <Text style={styles.title}>Speed Jenga</Text>
-       <Player totalDuration={90000}></Player>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Welcome"
+          component={Welcome}
+          options={{title: 'Speed Jenga'}}
+        />
+        <Stack.Screen name="Setup" component={Setup} />
+        <Stack.Screen name="Game" component={Game} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
@@ -26,7 +37,14 @@ const styles = StyleSheet.create({
   title: {
     color: 'white',
     fontSize: 30,
-  }
+  },
 });
 
 export default App;
+
+/*
+      <View style={styles.container}>
+       <Text style={styles.title}>Speed Jenga</Text>
+       <Player totalDuration={90000}></Player>
+    </View>
+*/
