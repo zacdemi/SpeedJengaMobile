@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, TouchableHighlight} from 'react-native';
+import {Text, View, TouchableHighlight, StyleSheet} from 'react-native';
 import {Timer} from 'react-native-stopwatch-timer';
 
 class Player extends Component {
@@ -32,10 +32,9 @@ class Player extends Component {
 
   render() {
     return (
-      <View>
+      <View style={[styles.container, {backgroundColor: this.props.color}]}>
         <Timer
           totalDuration={this.state.totalDuration}
-          msecs
           start={this.state.timerStart}
           reset={this.state.timerReset}
           options={options}
@@ -47,9 +46,6 @@ class Player extends Component {
             {!this.state.timerStart ? 'Block On' : 'Block Off'}
           </Text>
         </TouchableHighlight>
-        <TouchableHighlight onPress={this.resetTimer}>
-          <Text style={{fontSize: 30}}>Reset</Text>
-        </TouchableHighlight>
         <Text>{this.currentTime}</Text>
       </View>
     );
@@ -59,17 +55,25 @@ class Player extends Component {
 const handleTimerComplete = () => alert('custom completion function');
 
 const options = {
-  container: {
-    backgroundColor: '#000',
-    padding: 5,
-    borderRadius: 5,
-    width: 220,
-  },
+  container: {},
   text: {
-    fontSize: 30,
-    color: '#FFF',
+    textAlign: 'center',
+    fontSize: 100,
+    fontWeight: '700',
+    font: 'helvetica',
+    color: 'black',
     marginLeft: 7,
   },
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignContent: 'stretch',
+    backgroundColor: 'white',
+    width: '100%',
+  },
+});
 
 export default Player;
