@@ -1,8 +1,8 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import Welcome from './components/Welcome';
-import SelectPlayers from './components/SelectPlayers';
-import SelectColors from './components/SelectColors';
+import SelectPlayerCount from './components/SelectPlayerCount';
+import SelectPlayerColor from './components/SelectPlayerColor';
 import Game from './components/Game';
 
 import {NavigationContainer} from '@react-navigation/native';
@@ -22,8 +22,8 @@ const App = () => {
           options={{title: 'Speed Jenga'}}
         />
         <Stack.Screen name="Game" component={Game} />
-        <Stack.Screen name="SelectPlayers" component={SelectPlayers} />
-        <Stack.Screen name="SelectColors" component={SelectColors} />
+        <Stack.Screen name="SelectPlayerCount" component={SelectPlayerCount} />
+        <Stack.Screen name="SelectPlayerColor" component={SelectPlayerColor} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -12,7 +12,7 @@ const Welcome = ({navigation}) => {
           title="Next"
           color="white"
           onPress={() => {
-            navigation.navigate('SelectPlayers');
+            navigation.navigate('SelectPlayerCount');
           }}
         />
       </View>

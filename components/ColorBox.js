@@ -10,28 +10,8 @@ const ColorBox = props => {
     var randomColor = '#' + Math.floor(Math.random() * 16777216).toString(16);
     setColor(randomColor);
 
-    //set player number
     const playerNumber = props.children;
-
-    //check if player index exists in array
-    const index = props.playerArray.findIndex(
-      item => item.player === playerNumber,
-    );
-
-    //if exist update color else add
-    let newArray = [...props.playerArray];
-    if (index !== -1) {
-      newArray[index] = {...newArray[index], color: randomColor};
-      props.setPlayerArray(newArray);
-    } else {
-      props.setPlayerArray([
-        ...props.playerArray,
-        {
-          player: props.children,
-          color: randomColor,
-        },
-      ]);
-    }
+    props.updateColor(randomColor, playerNumber);
   };
 
   return (

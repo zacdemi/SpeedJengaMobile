@@ -9,10 +9,25 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 
-const SelectPlayers = ({navigation}) => {
+const SelectPlayerCount = ({navigation}) => {
+  /* create array of players based on count
+  playerArray = [
+    {number: 1},
+    {number: 2},
+  ]*/
+  const createPlayerArray = playerCount => {
+    const playerArray = [];
+
+    for (var i = 0; i < playerCount; i++) {
+      playerArray.push({number: i + 1});
+    }
+    console.log(playerArray);
+    return playerArray;
+  };
+
   const nextScreen = playerCount => {
-    navigation.navigate('SelectColors', {
-      playerCount: playerCount,
+    navigation.navigate('SelectPlayerColor', {
+      playerArray: createPlayerArray(playerCount),
     });
   };
 
@@ -42,4 +57,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SelectPlayers;
+export default SelectPlayerCount;
