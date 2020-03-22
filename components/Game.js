@@ -5,19 +5,19 @@ import Player from './Player';
 const Game = ({route, navigation}) => {
   const [playerArray, setPlayerArray] = useState(route.params.playerArray);
 
-  const [gameData, setGameData] = useState({
+  const [game, setGame] = useState({
     currentPlayerIndex: 0,
     currentRound: 1,
     totalTurns: 0,
     blockOn: true,
   });
 
-  const updatePlayer = () => {};
+  const updatePlayer = duration => {};
 
   const nextPlayer = () => {
     setGameData({
-      ...gameData,
-      currentPlayerIndex: incrementPlayerIndex(gameData.currentPlayerIndex),
+      ...game,
+      currentPlayerIndex: incrementPlayerIndex(game.currentPlayerIndex),
     });
   };
 
@@ -33,10 +33,10 @@ const Game = ({route, navigation}) => {
     <View style={styles.container}>
       <View style={styles.content}>
         <Player
-          number={playerArray[gameData.currentPlayerIndex].number}
-          color={playerArray[gameData.currentPlayerIndex].color}
-          totalDuration={playerArray[gameData.currentPlayerIndex].duration}
-          blockOn={gameData.blockOn}
+          playerNumber={playerArray[game.currentPlayerIndex].number}
+          color={playerArray[game.currentPlayerIndex].color}
+          totalDuration={playerArray[game.currentPlayerIndex].duration}
+          blockOn={game.blockOn}
           nextPlayer={nextPlayer}
         />
       </View>

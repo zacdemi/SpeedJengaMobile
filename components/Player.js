@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Text, View, TouchableHighlight, StyleSheet} from 'react-native';
 import {Timer} from 'react-native-stopwatch-timer';
 
@@ -14,6 +14,7 @@ const Player = props => {
   });
 
   const toggleTimer = () => {
+    console.log(player);
     setPlayer({...player, timerStart: !player.timerStart, timerReset: false});
   };
 
@@ -27,6 +28,10 @@ const Player = props => {
 
   return (
     <View style={[styles.container, {backgroundColor: props.color}]}>
+      <Text style={{fontSize: 50}}>{props.playerNumber}</Text>
+      <TouchableHighlight onPress={() => toggleTimer()}>
+        <Text style={{fontSize: 30}}>START</Text>
+      </TouchableHighlight>
       <Timer
         totalDuration={player.totalDuration}
         start={player.timerStart}
@@ -35,9 +40,9 @@ const Player = props => {
         handleFinish={() => handleTimerComplete}
         getTime={() => getFormattedTime}
       />
-      <TouchableHighlight onPress={() => toggleTimer}>
+      <TouchableHighlight onPress={() => toggleTimer()}>
         <Text style={{fontSize: 30}}>
-          {!player.timerStart ? 'Block On' : 'Block Off'}
+          {!player.timerStart ? 'Block Off' : 'Block On'}
         </Text>
       </TouchableHighlight>
       <TouchableHighlight onPress={props.nextPlayer}>
