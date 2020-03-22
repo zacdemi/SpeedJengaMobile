@@ -46,6 +46,9 @@ class Player extends Component {
             {!this.state.timerStart ? 'Block On' : 'Block Off'}
           </Text>
         </TouchableHighlight>
+        <TouchableHighlight onPress={this.props.nextPlayer}>
+          <Text style={{fontSize: 30}}>Next Player</Text>
+        </TouchableHighlight>
         <Text>{this.currentTime}</Text>
       </View>
     );

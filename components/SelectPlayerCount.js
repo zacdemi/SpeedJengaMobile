@@ -18,8 +18,12 @@ const SelectPlayerCount = ({navigation}) => {
   const createPlayerArray = playerCount => {
     const playerArray = [];
 
+    /* add duration from settings. 
+       standard time is 2 minutes divided by # of players */
+    const duration = 120000 / playerCount;
+
     for (var i = 0; i < playerCount; i++) {
-      playerArray.push({number: i + 1});
+      playerArray.push({number: i + 1, duration: duration});
     }
     console.log(playerArray);
     return playerArray;
