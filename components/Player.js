@@ -3,52 +3,55 @@ import {Text, View, TouchableHighlight, StyleSheet} from 'react-native';
 import {Timer} from 'react-native-stopwatch-timer';
 
 const Player = props => {
-  const [player, setPlayer] = useState({
+  const [timer, setTimer] = useState({
     timerStart: false,
-    totalDuration: props.totalDuration,
     timerReset: false,
-    name: '',
-    pauseBlocks: 1,
-    outOfGame: false,
     currentTime: props.duration,
   });
 
+  useEffect(() => {
+    setTimer({...timer, timerStart: true});
+  }, []);
+
   const toggleTimer = () => {
-    console.log(player);
-    setPlayer({...player, timerStart: !player.timerStart, timerReset: false});
+    setTimer({...timer, timerStart: !timer.timerStart, timerReset: false});
   };
 
   const resetTimer = () => {
-    setPlayer({...player, timerStart: false, timerReset: true});
+    setTimer({...timer, timerStart: false, timerReset: true});
   };
 
-  const getFormattedTime = time => {
-    setPlayer({...player, currentTime: time});
+  const getTime = time => {
+    setTimer({...timer, currentTime: time});
+  };
+
+  const handleBlockToggle = () => {
+    if (timer.timerStart) {
+      toggleTimer();
+    } else {
+      props.updatePlayerDuration(timer.currentTime);
+      props.nextPlayer();
+      resetTimer();
+      toggleTimer();
+    }
   };
 
   return (
     <View style={[styles.container, {backgroundColor: props.color}]}>
-      <Text style={{fontSize: 50}}>{props.playerNumber}</Text>
-      <TouchableHighlight onPress={() => toggleTimer()}>
-        <Text style={{fontSize: 30}}>START</Text>
-      </TouchableHighlight>
+      <Text style={{fontSize: 50}}>{'Player ' + props.playerNumber}</Text>
       <Timer
-        totalDuration={player.totalDuration}
-        start={player.timerStart}
-        reset={player.timerReset}
+        totalDuration={props.duration}
+        start={timer.timerStart}
+        reset={timer.timerReset}
         options={options}
-        handleFinish={() => handleTimerComplete}
-        getTime={() => getFormattedTime}
+        handleFinish={handleTimerComplete}
+        getTime={getTime}
       />
-      <TouchableHighlight onPress={() => toggleTimer()}>
+      <TouchableHighlight onPress={() => handleBlockToggle()}>
         <Text style={{fontSize: 30}}>
-          {!player.timerStart ? 'Block Off' : 'Block On'}
+          {!timer.timerStart ? 'Return Block' : 'Remove Block'}
         </Text>
       </TouchableHighlight>
-      <TouchableHighlight onPress={props.nextPlayer}>
-        <Text style={{fontSize: 30}}>Next Player</Text>
-      </TouchableHighlight>
-      <Text>{player.currentTime}</Text>
     </View>
   );
 };

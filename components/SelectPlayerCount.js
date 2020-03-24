@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 const SelectPlayerCount = ({navigation}) => {
-  /* create array of players based on count
+  /* create array of players based on count selection
   playerArray = [
     {number: 1},
     {number: 2},
@@ -19,8 +19,9 @@ const SelectPlayerCount = ({navigation}) => {
     const playerArray = [];
 
     /* add duration from settings. 
-       standard time is 2 minutes divided by # of players */
-    const duration = 120000 / playerCount;
+       standard time is 2 minutes divided by # of players 
+       + 700 miliseconds to visualize starting value */
+    const duration = 120000 / playerCount + 700;
 
     for (var i = 0; i < playerCount; i++) {
       playerArray.push({number: i + 1, duration: duration});
@@ -55,7 +56,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'stretch',
     backgroundColor: 'black',
   },

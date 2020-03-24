@@ -21,9 +21,13 @@ const App = () => {
           component={Welcome}
           options={{title: 'Speed Jenga'}}
         />
-        <Stack.Screen name="Game" component={Game} />
         <Stack.Screen name="SelectPlayerCount" component={SelectPlayerCount} />
         <Stack.Screen name="SelectPlayerColor" component={SelectPlayerColor} />
+        <Stack.Screen
+          name="Game"
+          component={Game}
+          //options={{headerLeft: null, headerShown: false}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -43,10 +47,3 @@ const styles = StyleSheet.create({
 });
 
 export default App;
-
-/*
-      <View style={styles.container}>
-       <Text style={styles.title}>Speed Jenga</Text>
-       <Player totalDuration={90000}></Player>
-    </View>
-*/

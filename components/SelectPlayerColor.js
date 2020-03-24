@@ -23,6 +23,14 @@ const SelectPlayerColor = ({route, navigation}) => {
     setPlayerArray(newPlayerArray);
   };
 
+  const allColorsSelected = () => {
+    let count = 0;
+    playerArray.forEach(player => {
+      player.color && count++;
+    });
+    return count == playerArray.length;
+  };
+
   const nextScreen = () => {
     console.log('next screen called');
     navigation.navigate('Game', {
@@ -33,7 +41,7 @@ const SelectPlayerColor = ({route, navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <Text style={styles.title}>Choose a Color</Text>
+        <Text style={styles.title}>Tap to Select Color</Text>
         {Array.from(Array(playerArray.length)).map((item, i) => {
           return (
             <ColorBox key={i} updateColor={updateColor}>
@@ -43,7 +51,7 @@ const SelectPlayerColor = ({route, navigation}) => {
         })}
       </View>
       <View style={styles.footer}>
-        <NextButton nextScreen={nextScreen} />
+        {allColorsSelected() && <NextButton nextScreen={nextScreen} />}
       </View>
     </View>
   );

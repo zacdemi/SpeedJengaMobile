@@ -1,21 +1,32 @@
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet, TouchableHighlight} from 'react-native';
 import Player from './Player';
 
 const Game = ({route, navigation}) => {
   const [playerArray, setPlayerArray] = useState(route.params.playerArray);
 
   const [game, setGame] = useState({
+    start: false,
     currentPlayerIndex: 0,
     currentRound: 1,
     totalTurns: 0,
     blockOn: true,
   });
 
-  const updatePlayer = duration => {};
+  const updatePlayerDuration = currentTime => {
+    const newPlayerArray = playerArray.map(player => {
+      if (player.number == game.currentPlayerIndex + 1) {
+        return {...player, duration: currentTime};
+      } else {
+        return player;
+      }
+    });
+    setPlayerArray(newPlayerArray);
+  };
 
   const nextPlayer = () => {
-    setGameData({
+    console.log(playerArray);
+    setGame({
       ...game,
       currentPlayerIndex: incrementPlayerIndex(game.currentPlayerIndex),
     });
@@ -31,15 +42,20 @@ const Game = ({route, navigation}) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.content}>
-        <Player
-          playerNumber={playerArray[game.currentPlayerIndex].number}
-          color={playerArray[game.currentPlayerIndex].color}
-          totalDuration={playerArray[game.currentPlayerIndex].duration}
-          blockOn={game.blockOn}
-          nextPlayer={nextPlayer}
-        />
-      </View>
+      {playerArray.map((player, i) => {
+        return (
+          i == game.currentPlayerIndex && (
+            <Player
+              playerNumber={player.number}
+              color={player.color}
+              duration={player.duration}
+              blockOn={game.blockOn}
+              nextPlayer={nextPlayer}
+              updatePlayerDuration={updatePlayerDuration}
+            />
+          )
+        );
+      })}
     </View>
   );
 };
@@ -47,13 +63,7 @@ const Game = ({route, navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
-  },
-  content: {
-    flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
   },
 });
 
