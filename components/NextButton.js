@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     margin: 20,
     width: 100,
-    backgroundColor: 'orange',
+    backgroundColor: '#2196f3',
     borderRadius: 10,
   },
 });

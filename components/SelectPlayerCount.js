@@ -31,7 +31,7 @@ const SelectPlayerCount = ({navigation}) => {
   };
 
   const nextScreen = playerCount => {
-    navigation.navigate('SelectPlayerColor', {
+    navigation.navigate('Select Color', {
       playerArray: createPlayerArray(playerCount),
     });
   };
@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     fontFamily: 'helvetica',
     color: 'white',
     marginBottom: 20,
+    marginTop: 20,
   },
   container: {
     flex: 1,

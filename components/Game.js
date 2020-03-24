@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {Text, View, StyleSheet, TouchableHighlight} from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
 import Player from './Player';
+import PreStart from './PreStart';
 
 const Game = ({route, navigation}) => {
   const [playerArray, setPlayerArray] = useState(route.params.playerArray);
@@ -40,22 +41,32 @@ const Game = ({route, navigation}) => {
     }
   };
 
+  const startGame = () => {
+    setGame({...game, start: true});
+  };
+
   return (
     <View style={styles.container}>
-      {playerArray.map((player, i) => {
-        return (
-          i == game.currentPlayerIndex && (
-            <Player
-              playerNumber={player.number}
-              color={player.color}
-              duration={player.duration}
-              blockOn={game.blockOn}
-              nextPlayer={nextPlayer}
-              updatePlayerDuration={updatePlayerDuration}
-            />
-          )
-        );
-      })}
+      {!game.start ? (
+        <PreStart playerArray={playerArray} startGame={() => startGame} />
+      ) : (
+        playerArray.map((player, i) => {
+          return (
+            i == game.currentPlayerIndex && (
+              <Player
+                playerNumber={player.number}
+                color={player.color}
+                duration={player.duration}
+                blockOn={game.blockOn}
+                nextPlayer={nextPlayer}
+                updatePlayerDuration={updatePlayerDuration}
+                gameStart={game.start}
+                key={i}
+              />
+            )
+          );
+        })
+      )}
     </View>
   );
 };

@@ -21,8 +21,8 @@ const App = () => {
           component={Welcome}
           options={{title: 'Speed Jenga'}}
         />
-        <Stack.Screen name="SelectPlayerCount" component={SelectPlayerCount} />
-        <Stack.Screen name="SelectPlayerColor" component={SelectPlayerColor} />
+        <Stack.Screen name="Select Players" component={SelectPlayerCount} />
+        <Stack.Screen name="Select Color" component={SelectPlayerColor} />
         <Stack.Screen
           name="Game"
           component={Game}

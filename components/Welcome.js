@@ -1,21 +1,18 @@
 import React from 'react';
 
 import {View, Text, StyleSheet, Button} from 'react-native';
+import NextButton from './NextButton';
 
 const Welcome = ({navigation}) => {
   console.log('welcome');
+
+  const nextScreen = () => {
+    navigation.navigate('Select Players');
+  };
   return (
     <View style={styles.main}>
       <Text style={styles.title}>Speed Jenga</Text>
-      <View style={styles.buttonContainer}>
-        <Button
-          title="Next"
-          color="white"
-          onPress={() => {
-            navigation.navigate('SelectPlayerCount');
-          }}
-        />
-      </View>
+      <NextButton nextScreen={nextScreen} />
     </View>
   );
 };
@@ -32,12 +29,6 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: '700',
     fontFamily: 'helvetica',
-  },
-  buttonContainer: {
-    margin: 20,
-    width: 100,
-    backgroundColor: 'orange',
-    borderRadius: 10,
   },
 });
 

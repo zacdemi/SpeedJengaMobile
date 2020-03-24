@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Text, View, TouchableHighlight, StyleSheet} from 'react-native';
+import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
 import {Timer} from 'react-native-stopwatch-timer';
 
 const Player = props => {
@@ -10,7 +10,7 @@ const Player = props => {
   });
 
   useEffect(() => {
-    setTimer({...timer, timerStart: true});
+    props.gameStart && setTimer({...timer, timerStart: true});
   }, []);
 
   const toggleTimer = () => {
@@ -38,20 +38,21 @@ const Player = props => {
 
   return (
     <View style={[styles.container, {backgroundColor: props.color}]}>
-      <Text style={{fontSize: 50}}>{'Player ' + props.playerNumber}</Text>
+      <Text style={styles.title}>{'Player ' + props.playerNumber}</Text>
       <Timer
         totalDuration={props.duration}
         start={timer.timerStart}
         reset={timer.timerReset}
         options={options}
-        handleFinish={handleTimerComplete}
         getTime={getTime}
       />
-      <TouchableHighlight onPress={() => handleBlockToggle()}>
-        <Text style={{fontSize: 30}}>
-          {!timer.timerStart ? 'Return Block' : 'Remove Block'}
-        </Text>
-      </TouchableHighlight>
+      {props.gameStart && (
+        <TouchableOpacity onPress={() => handleBlockToggle()}>
+          <Text style={styles.blockToggle}>
+            {!timer.timerStart ? 'Return Block' : 'Remove Block'}
+          </Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
@@ -64,13 +65,20 @@ const options = {
     textAlign: 'center',
     fontSize: 100,
     fontWeight: '700',
-    font: 'helvetica',
     color: 'black',
     marginLeft: 7,
   },
 };
 
 const styles = StyleSheet.create({
+  title: {
+    fontSize: 30,
+    textAlign: 'center',
+  },
+  blockToggle: {
+    fontSize: 30,
+    textAlign: 'center',
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
